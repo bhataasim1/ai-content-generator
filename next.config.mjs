@@ -6,6 +6,7 @@ const nextConfig = {
             '127.0.0.1',
             "images.unsplash.com",
             "unsplash.com",
+            "plus.unsplash.com",
         ],
     },
     async headers() {
