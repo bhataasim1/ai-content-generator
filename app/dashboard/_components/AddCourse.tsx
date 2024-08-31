@@ -1,6 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { useUser } from "@clerk/nextjs";
+import Link from "next/link";
 import { FaWandMagicSparkles } from "react-icons/fa6";
 
 const AddCourse = () => {
@@ -20,10 +21,12 @@ const AddCourse = () => {
           Create new course with AI, share with friends and Earn some penny
         </p>
       </div>
-      <Button className="gap-2">
-        <FaWandMagicSparkles />
-        Create AI course
-      </Button>
+      <Link href="/create-course">
+        <Button className="gap-2">
+          <FaWandMagicSparkles />
+          Create AI course
+        </Button>
+      </Link>
     </div>
   );
 };
