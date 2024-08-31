@@ -21,7 +21,9 @@ const Sidebar = () => {
                 item.route === path && "bg-gray-100 text-black"
               }`}
             >
-              <div className="text-2xl">{React.createElement(item.icon)}</div>
+              <div className="text-2xl">
+                <item.icon />
+              </div>
               <h2>{item.name}</h2>
             </div>
           </Link>
