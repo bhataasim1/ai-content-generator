@@ -1,11 +1,33 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { stepperOptions } from "./_constants/stepperOptions";
 import { Button } from "@/components/ui/button";
 import SelectCategory from "./_components/SelectCategory";
+import TopicDesc from "./_components/TopicDesc";
+import SelectOption from "./_components/SelectOption";
+import { UserInputContext } from "../_context/UserInputContext";
+import { FaWandMagicSparkles } from "react-icons/fa6";
 
 const CreateCoursePage = () => {
   const [step, setStep] = useState<number>(0);
+  const { userInput } = useContext(UserInputContext);
+
+  const allowNextStep = () => {
+    if (step === 0) {
+      return userInput?.category?.length ?? 0 > 0;
+    } else if (step === 1) {
+      return !!userInput?.topic && !!userInput?.description;
+    } else if (step === 2) {
+      return (
+        !!userInput?.difficulty &&
+        !!userInput?.duration &&
+        !!userInput?.video &&
+        !!userInput?.chapters
+      );
+    }
+    return false;
+  };
+
   return (
     <div>
       <div className="flex flex-col justify-center items-center mt-10">
@@ -36,8 +58,13 @@ const CreateCoursePage = () => {
       </div>
 
       <div className="px-10 md:px-20 lg-px-44 mt-10 ">
-        {step === 0 && <SelectCategory />}
-
+        {step === 0 ? (
+          <SelectCategory />
+        ) : step === 1 ? (
+          <TopicDesc />
+        ) : (
+          <SelectOption />
+        )}
 
         <div className="flex justify-between mt-10">
           <Button
@@ -48,9 +75,17 @@ const CreateCoursePage = () => {
             Previous
           </Button>
           {stepperOptions.length - 1 == step ? (
-            <Button>Generate Course</Button>
+            <Button disabled={!allowNextStep()} className="gap-2">
+              {" "}
+              <FaWandMagicSparkles /> Generate Course
+            </Button>
           ) : (
-            <Button onClick={() => setStep(step + 1)}>Next</Button>
+            <Button
+              onClick={() => setStep(step + 1)}
+              disabled={!allowNextStep()}
+            >
+              Next
+            </Button>
           )}
         </div>
       </div>
