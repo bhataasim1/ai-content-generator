@@ -9,11 +9,19 @@ import { UserInputContext } from "../_context/UserInputContext";
 import { FaWandMagicSparkles } from "react-icons/fa6";
 import { generateCourseLayout } from "@/configs/ai-models";
 import LoadingDialog from "./_components/LoadingDialog";
+import { useUser } from "@clerk/nextjs";
+import { storeDataInDatabase } from "./_utils/saveDataInDb";
+import uuid4 from "uuid4";
+import { useRouter } from "next/navigation";
 
 const CreateCoursePage = () => {
   const [step, setStep] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(false);
   const { userInput } = useContext(UserInputContext);
+
+  const { user } = useUser();
+
+  const router = useRouter();
 
   const allowNextStep = () => {
     if (step === 0) {
@@ -35,8 +43,12 @@ const CreateCoursePage = () => {
     const BASIC_PROMPT = `Generate a course tutorial on following details with field name, description, along with the chapter name about and duration: Category '${userInput?.category}' Topic '${userInput?.topic}' Level '${userInput?.difficulty}' Duration '${userInput?.duration}' chapters '${userInput?.chapters}' in JSON format.\n`;
     setLoading(true);
     try {
+      let id = uuid4();
       const result = await generateCourseLayout.sendMessage(BASIC_PROMPT);
       console.log(JSON.parse(result.response.text()));
+      const data = JSON.parse(result.response.text());
+      await storeDataInDatabase(id, userInput, data, user);
+      router.replace(`/create-course/${id}`);
     } catch (error) {
       console.log(error);
     } finally {
