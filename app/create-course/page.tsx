@@ -7,9 +7,12 @@ import TopicDesc from "./_components/TopicDesc";
 import SelectOption from "./_components/SelectOption";
 import { UserInputContext } from "../_context/UserInputContext";
 import { FaWandMagicSparkles } from "react-icons/fa6";
+import { generateCourseLayout } from "@/configs/ai-models";
+import LoadingDialog from "./_components/LoadingDialog";
 
 const CreateCoursePage = () => {
   const [step, setStep] = useState<number>(0);
+  const [loading, setLoading] = useState<boolean>(false);
   const { userInput } = useContext(UserInputContext);
 
   const allowNextStep = () => {
@@ -26,6 +29,19 @@ const CreateCoursePage = () => {
       );
     }
     return false;
+  };
+
+  const generateCourse = async () => {
+    const BASIC_PROMPT = `Generate a course tutorial on following details with field name, description, along with the chapter name about and duration: Category '${userInput?.category}' Topic '${userInput?.topic}' Level '${userInput?.difficulty}' Duration '${userInput?.duration}' chapters '${userInput?.chapters}' in JSON format.\n`;
+    setLoading(true);
+    try {
+      const result = await generateCourseLayout.sendMessage(BASIC_PROMPT);
+      console.log(JSON.parse(result.response.text()));
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -75,8 +91,11 @@ const CreateCoursePage = () => {
             Previous
           </Button>
           {stepperOptions.length - 1 == step ? (
-            <Button disabled={!allowNextStep()} className="gap-2">
-              {" "}
+            <Button
+              disabled={!allowNextStep() || loading}
+              onClick={generateCourse}
+              className={`gap-2`}
+            >
               <FaWandMagicSparkles /> Generate Course
             </Button>
           ) : (
@@ -89,6 +108,7 @@ const CreateCoursePage = () => {
           )}
         </div>
       </div>
+      <LoadingDialog loading={loading} />
     </div>
   );
 };
