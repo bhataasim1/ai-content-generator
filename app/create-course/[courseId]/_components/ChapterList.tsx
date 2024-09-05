@@ -1,12 +1,14 @@
 import { LuTimer, LuCheckCircle2 } from "react-icons/lu";
-import { ChapterType } from "../page";
+import { CourseType } from "../page";
+import EditChapters from "./_edit/EditChapters";
 
 type ChapterListProps = {
-  chapterList: ChapterType[] | undefined;
+  course: CourseType | null;
+  onRefresh: (refresh: boolean) => void;
 };
 
-const ChapterList = ({ chapterList }: ChapterListProps) => {
-  if (!chapterList || chapterList.length === 0) {
+const ChapterList = ({ course, onRefresh }: ChapterListProps) => {
+  if (!course || course.courseOutput.chapters.length === 0) {
     return <p>No chapters available.</p>;
   }
 
@@ -14,7 +16,7 @@ const ChapterList = ({ chapterList }: ChapterListProps) => {
     <div className="mt-3">
       <h2 className="font-medium text-2xl">Chapters</h2>
       <div className="mt-2">
-        {chapterList?.map((chapter, index) => (
+        {course?.courseOutput.chapters.map((chapter, index) => (
           <div
             key={index}
             className="border p-5 rounded-lg mb-2 flex items-center justify-between"
@@ -24,7 +26,14 @@ const ChapterList = ({ chapterList }: ChapterListProps) => {
                 {index + 1}
               </h2>
               <div>
-                <h2 className="font-medium text-lg">{chapter?.chapter_name}</h2>
+                <h2 className="font-medium text-lg">
+                  {chapter?.chapter_name}
+                  <EditChapters
+                    course={course}
+                    index={index}
+                    onRefresh={() => onRefresh(true)}
+                  />
+                </h2>
                 <p className="text-sm text-gray-500">{chapter.description}</p>
                 <p className="flex gap-2 text-primary items-center">
                   <LuTimer /> {chapter.duration}
