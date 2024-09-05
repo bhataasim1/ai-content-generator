@@ -33,20 +33,20 @@ const CreateCoursePage = () => {
         !!userInput?.difficulty &&
         !!userInput?.duration &&
         !!userInput?.video &&
-        !!userInput?.chapters
+        !!userInput?.totalChapters
       );
     }
     return false;
   };
 
   const generateCourse = async () => {
-    const BASIC_PROMPT = `Generate a course tutorial on following details with field name, description, along with the chapter name about and duration: Category '${userInput?.category}' Topic '${userInput?.topic}' Level '${userInput?.difficulty}' Duration '${userInput?.duration}' chapters '${userInput?.chapters}' in JSON format.\n`;
+    const BASIC_PROMPT = `Generate a course tutorial on following details with field name, description, along with the chapter name about and duration: Category '${userInput?.category}' Topic '${userInput?.topic}' Description '${userInput.description}' Level '${userInput?.difficulty}' Duration '${userInput?.duration}' chapters '${userInput?.totalChapters}' in JSON format.\n`;
     setLoading(true);
     try {
       let id = uuid4();
       const result = await generateCourseLayout.sendMessage(BASIC_PROMPT);
-      console.log(JSON.parse(result.response.text()));
       const data = JSON.parse(result.response.text());
+      console.log("Data", data);
       await storeDataInDatabase(id, userInput, data, user);
       router.replace(`/create-course/${id}`);
     } catch (error) {
