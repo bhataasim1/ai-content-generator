@@ -1,7 +1,6 @@
 import { UserInputType } from "@/app/_context/UserInputContext";
 import { db } from "@/configs/db";
 import { CourseList } from "@/schema/schema";
-import uuid4 from "uuid4";
 
 type UserInput = Pick<UserInputType, "topic" | "difficulty" | "category">;
 
