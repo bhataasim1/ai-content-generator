@@ -2,18 +2,24 @@ import Image from "next/image";
 import { CourseType } from "../page";
 import { LuPuzzle } from "react-icons/lu";
 import { Button } from "@/components/ui/button";
+import EditCourseBasicInfo from "./_edit/EditCourseBasicInfo";
 
 type CourseBasicInfoProps = {
   courseInfo: CourseType | null;
+  onRefresh: (refresh: boolean) => void;
 };
 
-const CourseBasicInfo = ({ courseInfo }: CourseBasicInfoProps) => {
+const CourseBasicInfo = ({ courseInfo, onRefresh }: CourseBasicInfoProps) => {
   return (
     <div className="p-10 border rounded-xl shadow-sm mt-5">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         <div className="">
           <h2 className="font-bold text-3xl">
             {courseInfo?.courseOutput.topic}
+            <EditCourseBasicInfo
+              courseInfo={courseInfo}
+              onRefresh={() => onRefresh(true)}
+            />
           </h2>
           <p className="text-sm text-gray-400 mt-3">
             {courseInfo?.courseOutput.description}
