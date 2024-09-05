@@ -47,6 +47,7 @@ const CoursePageLayout = ({ params }: { params: ParamsType }) => {
 
   useEffect(() => {
     params && getCourse();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params, user]);
 
   const getCourse = async () => {
@@ -73,13 +74,13 @@ const CoursePageLayout = ({ params }: { params: ParamsType }) => {
       <h2 className="font-bold text-center text-2xl">Course Layout</h2>
 
       {/* Basic Info */}
-      <CourseBasicInfo courseInfo={course} />
+      <CourseBasicInfo courseInfo={course} onRefresh={() => getCourse()} />
 
       {/* Course Details */}
       <CourseDetail courseDetail={course} />
 
       {/* List Of Lessons */}
-      <ChapterList chapterList={course?.courseOutput.chapters} />
+      <ChapterList course={course} onRefresh={() => getCourse()} />
     </div>
   );
 };
