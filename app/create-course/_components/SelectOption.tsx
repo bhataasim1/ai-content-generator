@@ -81,8 +81,8 @@ const SelectOption = () => {
           <label className="text-sm">📄 No. of Chapters</label>
           <Input
             type="number"
-            onChange={(e) => handleInputChange("chapters", e.target.value)}
-            defaultValue={userInput?.chapters}
+            onChange={(e) => handleInputChange("totalChapters", e.target.value)}
+            defaultValue={userInput?.totalChapters}
           />
         </div>
       </div>
