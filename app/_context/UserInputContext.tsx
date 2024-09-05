@@ -5,7 +5,7 @@ export type UserInputType = {
   difficulty?: string;
   duration?: string;
   video?: string;
-  chapters?: number;
+  totalChapters?: number;
   topic?: string;
   description?: string;
 };
