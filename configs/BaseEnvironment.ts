@@ -6,6 +6,7 @@ export type Environment = "development" | "production" | "test";
 
 export class BaseEnvironment {
   defaultEnvironmentValues = {
+    HOST_URL: "http://localhost:3000",
     GOOGLE_GEMENI_API_KEY: "my-api-key",
     DRIZZLE_DATABASE_URL:
       "postgresql://myuser:mypassword@mydbhost.com/mydatabase",
@@ -16,10 +17,18 @@ export class BaseEnvironment {
     FIREBASE_MESSAGING_SENDER_ID: "my-firebase-messaging-sender-id",
     FIREBASE_APP_ID: "my-firebase-app-id",
     FIREBASE_MEASUREMENT_ID: "my-firebase-measurement-id",
+    YOUTUBE_API_KEY: "my-youtube-api-key",
   };
 
   get environment(): Environment {
     return process.env.NODE_ENV as Environment;
+  }
+
+  get HOST_URL(): string {
+    return (
+      process.env.NEXT_PUBLIC_HOST_URL! ||
+      this.defaultEnvironmentValues.HOST_URL
+    );
   }
 
   get GOOGLE_GEMENI_API_KEY(): string {
@@ -82,6 +91,13 @@ export class BaseEnvironment {
     return (
       process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID! ||
       this.defaultEnvironmentValues.FIREBASE_MEASUREMENT_ID
+    );
+  }
+
+  get YOUTUBE_API_KEY(): string {
+    return (
+      process.env.NEXT_PUBLIC_YOUTUBE_API_KEY! ||
+      this.defaultEnvironmentValues.YOUTUBE_API_KEY
     );
   }
 }
