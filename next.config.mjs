@@ -7,6 +7,7 @@ const nextConfig = {
             "images.unsplash.com",
             "unsplash.com",
             "plus.unsplash.com",
+            "firebasestorage.googleapis.com",
         ],
     },
     async headers() {
