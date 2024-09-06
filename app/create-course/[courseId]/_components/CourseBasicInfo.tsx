@@ -1,8 +1,13 @@
+"use client";
+
 import Image from "next/image";
 import { CourseType } from "../page";
 import { LuPuzzle } from "react-icons/lu";
 import { Button } from "@/components/ui/button";
 import EditCourseBasicInfo from "./_edit/EditCourseBasicInfo";
+import { Input } from "@/components/ui/input";
+import { useState } from "react";
+import { uploadFilesToFirebase } from "../_utils/uploadFilesToFirebase";
 
 type CourseBasicInfoProps = {
   courseInfo: CourseType | null;
@@ -10,6 +15,13 @@ type CourseBasicInfoProps = {
 };
 
 const CourseBasicInfo = ({ courseInfo, onRefresh }: CourseBasicInfoProps) => {
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.item(0) as Blob;
+    setSelectedImage(URL.createObjectURL(file));
+    uploadFilesToFirebase(file, courseInfo!);
+  };
+
   return (
     <div className="p-10 border rounded-xl shadow-sm mt-5">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -31,12 +43,21 @@ const CourseBasicInfo = ({ courseInfo, onRefresh }: CourseBasicInfoProps) => {
           <Button className="w-full mt-5">Start</Button>
         </div>
         <div>
-          <Image
-            src={"/vercel.svg"}
-            alt="image"
-            width={200}
-            height={200}
-            className="w-full rounded-xl h-[250px] object-cover"
+          <label htmlFor="image-upload">
+            <Image
+              src={selectedImage ? selectedImage : "/vercel.svg"}
+              alt="image"
+              width={200}
+              height={200}
+              className="w-full rounded-xl h-[250px] object-cover cursor-pointer"
+            />
+          </label>
+          <Input
+            type="file"
+            accept="image/*"
+            id="image-upload"
+            className="opacity-0"
+            onChange={handleImageUpload}
           />
         </div>
       </div>
