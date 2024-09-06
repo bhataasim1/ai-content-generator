@@ -6,7 +6,7 @@ import { LuPuzzle } from "react-icons/lu";
 import { Button } from "@/components/ui/button";
 import EditCourseBasicInfo from "./_edit/EditCourseBasicInfo";
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { uploadFilesToFirebase } from "../_utils/uploadFilesToFirebase";
 
 type CourseBasicInfoProps = {
@@ -15,7 +15,14 @@ type CourseBasicInfoProps = {
 };
 
 const CourseBasicInfo = ({ courseInfo, onRefresh }: CourseBasicInfoProps) => {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedImage, setSelectedImage] = useState<string | null | undefined>(
+    null
+  );
+
+  useEffect(() => {
+    setSelectedImage(courseInfo?.courseBanner);
+  }, [courseInfo]);
+
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.item(0) as Blob;
     setSelectedImage(URL.createObjectURL(file));
