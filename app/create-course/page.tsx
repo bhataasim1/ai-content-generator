@@ -46,7 +46,7 @@ const CreateCoursePage = () => {
       let id = uuid4();
       const result = await generateCourseLayout.sendMessage(BASIC_PROMPT);
       const data = JSON.parse(result.response.text());
-      console.log("Data", data);
+      // console.log("Data", data);
       await storeDataInDatabase(id, userInput, data, user);
       router.replace(`/create-course/${id}`);
     } catch (error) {
