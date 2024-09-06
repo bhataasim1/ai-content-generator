@@ -8,8 +8,12 @@ import { useEffect, useState } from "react";
 import CourseBasicInfo from "./_components/CourseBasicInfo";
 import CourseDetail from "./_components/CourseDetail";
 import ChapterList from "./_components/ChapterList";
+import { Button } from "@/components/ui/button";
+import { generateCourseContent } from "./_utils/generateCourseContent";
+import LoadingDialog from "../_components/LoadingDialog";
+import { useRouter } from "next/navigation";
 
-type ParamsType = {
+export type ParamsType = {
   courseId: string;
 };
 
@@ -39,11 +43,16 @@ export type CourseType = {
   username: string | null;
   userprofileimage: string | null;
   createdBy: string | null;
+  courseBanner: string | null;
+  isPublished: boolean;
 };
 
 const CoursePageLayout = ({ params }: { params: ParamsType }) => {
   const { user } = useUser();
   const [course, setCourse] = useState<CourseType | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const router = useRouter();
 
   useEffect(() => {
     params && getCourse();
@@ -64,14 +73,25 @@ const CoursePageLayout = ({ params }: { params: ParamsType }) => {
         )
       );
     setCourse(res[0] as CourseType);
-    // console.log(res);
+    // console.log("res", res);
   };
 
-  console.log(course);
+  // console.log(course);
+
+  const handleGenerateCourseContent = async () => {
+    try {
+      await generateCourseContent(course!, setLoading);
+      router.replace(`/create-course/${params.courseId}/finish`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="mt-10 px-7 md:px-20 lg:px-44">
       <h2 className="font-bold text-center text-2xl">Course Layout</h2>
+
+      <LoadingDialog loading={loading} />
 
       {/* Basic Info */}
       <CourseBasicInfo courseInfo={course} onRefresh={() => getCourse()} />
@@ -81,6 +101,10 @@ const CoursePageLayout = ({ params }: { params: ParamsType }) => {
 
       {/* List Of Lessons */}
       <ChapterList course={course} onRefresh={() => getCourse()} />
+
+      <Button className="my-10" onClick={handleGenerateCourseContent}>
+        Generate Course Content
+      </Button>
     </div>
   );
 };
