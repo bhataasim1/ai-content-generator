@@ -1,9 +1,9 @@
 import {
   UserInputContext,
-  UserInputType,
 } from "@/app/_context/UserInputContext";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { UserInputType } from "@/types/types";
 import React, { useContext } from "react";
 
 const TopicDesc = () => {
