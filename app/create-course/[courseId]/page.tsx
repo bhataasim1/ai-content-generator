@@ -12,39 +12,10 @@ import { Button } from "@/components/ui/button";
 import { generateCourseContent } from "./_utils/generateCourseContent";
 import LoadingDialog from "../_components/LoadingDialog";
 import { useRouter } from "next/navigation";
+import { CourseType } from "@/types/types";
 
 export type ParamsType = {
   courseId: string;
-};
-
-export type ChapterType = {
-  chapter_name: string;
-  description: string;
-  duration: string;
-};
-
-type courseOutputType = {
-  category: string;
-  chapters: ChapterType[];
-  duration: string;
-  level: string;
-  topic: string;
-  description: string;
-};
-
-export type CourseType = {
-  id: number;
-  courseId: string;
-  courseName: string;
-  category: string;
-  level: string;
-  courseOutput: courseOutputType;
-  isVideo: string;
-  username: string | null;
-  userprofileimage: string | null;
-  createdBy: string | null;
-  courseBanner: string | null;
-  isPublished: boolean;
 };
 
 const CoursePageLayout = ({ params }: { params: ParamsType }) => {
