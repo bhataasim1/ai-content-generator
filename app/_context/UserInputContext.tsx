@@ -1,14 +1,5 @@
+import { UserInputType } from "@/types/types";
 import { createContext, Dispatch, SetStateAction } from "react";
-
-export type UserInputType = {
-  category?: string;
-  difficulty?: string;
-  duration?: string;
-  video?: string;
-  totalChapters?: number;
-  topic?: string;
-  description?: string;
-};
 
 type UserInputContextType = {
   userInput: UserInputType;
