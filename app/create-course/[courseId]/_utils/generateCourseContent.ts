@@ -1,8 +1,8 @@
 import { generateCourseChapters } from "@/configs/ai-models";
-import { CourseType } from "../page";
 import { getYoutubeVideos } from "@/configs/service";
 import { db } from "@/configs/db";
 import { CourseChapters } from "@/schema/schema";
+import { CourseType } from "@/types/types";
 
 export const generateCourseContent = async (
   course: CourseType,
