@@ -2,8 +2,8 @@ import { db } from "@/configs/db";
 import { firebaseStorage } from "@/configs/firebase.config";
 import { CourseList } from "@/schema/schema";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { CourseType } from "../page";
 import { eq } from "drizzle-orm";
+import { CourseType } from "@/types/types";
 
 export const uploadFilesToFirebase = async (
   file: Blob,
