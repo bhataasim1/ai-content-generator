@@ -1,4 +1,4 @@
-import { CourseType } from "../page";
+import { CourseType } from "@/types/types";
 import { LuBarChart2, LuTimer, LuBookOpen, LuFileVideo2 } from "react-icons/lu";
 
 type CourseDetailProps = {
