@@ -14,11 +14,11 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { FaEdit } from "react-icons/fa";
-import { CourseType } from "../../page";
 import { useEffect, useState } from "react";
 import { db } from "@/configs/db";
 import { CourseList } from "@/schema/schema";
 import { eq } from "drizzle-orm";
+import { CourseType } from "@/types/types";
 
 type EditCourseBasicInfoProps = {
   courseInfo: CourseType | null;
