@@ -1,6 +1,6 @@
 import { LuTimer, LuCheckCircle2 } from "react-icons/lu";
-import { CourseType } from "../page";
 import EditChapters from "./_edit/EditChapters";
+import { CourseType } from "@/types/types";
 
 type ChapterListProps = {
   course: CourseType | null;
