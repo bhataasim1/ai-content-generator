@@ -81,6 +81,10 @@ const CoursePageLayout = ({ params }: { params: ParamsType }) => {
   const handleGenerateCourseContent = async () => {
     try {
       await generateCourseContent(course!, setLoading);
+      await db
+        .update(CourseList)
+        .set({ isPublished: true })
+        .where(eq(CourseList.courseId, params.courseId));
       router.replace(`/create-course/${params.courseId}/finish`);
     } catch (error) {
       console.log(error);
