@@ -2,7 +2,6 @@
 
 import { useUser } from "@clerk/nextjs";
 import { useEffect, useState } from "react";
-import { CourseType, ParamsType } from "../page";
 import { useRouter } from "next/navigation";
 import { db } from "@/configs/db";
 import { CourseList } from "@/schema/schema";
@@ -10,6 +9,8 @@ import { and, eq } from "drizzle-orm";
 import CourseBasicInfo from "../_components/CourseBasicInfo";
 import { BaseEnvironment } from "@/configs/BaseEnvironment";
 import { IoCopyOutline } from "react-icons/io5";
+import { CourseType } from "@/types/types";
+import { ParamsType } from "../page";
 
 const FinsihScreen = ({ params }: { params: ParamsType }) => {
   const { user } = useUser();
