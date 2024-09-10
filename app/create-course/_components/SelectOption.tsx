@@ -1,6 +1,5 @@
 import {
   UserInputContext,
-  UserInputType,
 } from "@/app/_context/UserInputContext";
 import { Input } from "@/components/ui/input";
 import {
@@ -10,6 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { UserInputType } from "@/types/types";
 import { useContext } from "react";
 
 const SelectOption = () => {
