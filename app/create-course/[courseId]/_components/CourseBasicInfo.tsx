@@ -1,13 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { CourseType } from "../page";
 import { LuPuzzle } from "react-icons/lu";
 import { Button } from "@/components/ui/button";
 import EditCourseBasicInfo from "./_edit/EditCourseBasicInfo";
 import { Input } from "@/components/ui/input";
 import { useEffect, useState } from "react";
 import { uploadFilesToFirebase } from "../_utils/uploadFilesToFirebase";
+import { CourseType } from "@/types/types";
 
 type CourseBasicInfoProps = {
   courseInfo: CourseType | null;
