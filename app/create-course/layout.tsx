@@ -2,15 +2,22 @@
 import { useState } from "react";
 import { UserInputContext } from "../_context/UserInputContext";
 import Header from "../dashboard/_components/Header";
-import { UserInputType } from "@/types/types";
+import { CourseType, UserInputType } from "@/types/types";
+import { UserCourseListContext } from "../_context/UserCourseList.context";
 
 const CreateCourseLayout = ({ children }: { children: React.ReactNode }) => {
   const [userInput, setUserInput] = useState<UserInputType>({});
+  const [userCourseList, setUserCourseList] = useState<CourseType[]>([]);
+
   return (
     <div>
       <UserInputContext.Provider value={{ userInput, setUserInput }}>
-        <Header />
-        {children}
+        <UserCourseListContext.Provider
+          value={{ userCourseList, setUserCourseList }}
+        >
+          <Header />
+          {children}
+        </UserCourseListContext.Provider>
       </UserInputContext.Provider>
     </div>
   );
