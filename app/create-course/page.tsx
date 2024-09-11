@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { stepperOptions } from "./_constants/stepperOptions";
 import { Button } from "@/components/ui/button";
 import SelectCategory from "./_components/SelectCategory";
@@ -14,10 +14,31 @@ import { storeDataInDatabase } from "./_utils/saveDataInDb";
 import uuid4 from "uuid4";
 import { useRouter } from "next/navigation";
 
+//may be we need to remove these imports if we found any other best way
+import { db } from "@/configs/db";
+import { CourseList } from "@/schema/schema";
+import { eq } from "drizzle-orm";
+import { CourseType } from "@/types/types";
+import { UserCourseListContext } from "../_context/UserCourseList.context";
+
 const CreateCoursePage = () => {
   const [step, setStep] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(false);
   const { userInput } = useContext(UserInputContext);
+
+  // Don't Know im doing wrong here
+  const { userCourseList, setUserCourseList } = useContext(
+    UserCourseListContext
+  );
+  const getUserCourses = async () => {
+    const res = await db
+      .select()
+      .from(CourseList)
+      .where(
+        eq(CourseList.createdBy, user?.primaryEmailAddress?.emailAddress ?? "")
+      );
+    setUserCourseList(res as CourseType[]);
+  };
 
   const { user } = useUser();
 
@@ -55,6 +76,14 @@ const CreateCoursePage = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    user && getUserCourses();
+    if (userCourseList.length >= 5) {
+      router.replace("/dashboard/upgrade");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user, userCourseList]);
 
   return (
     <div>
