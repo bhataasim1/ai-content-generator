@@ -10,7 +10,7 @@ import { UserCourseListContext } from "@/app/_context/UserCourseList.context";
 const Sidebar = () => {
   const path = usePathname();
   const { userCourseList } = useContext(UserCourseListContext);
-  console.log("User Context Courses", userCourseList);
+  // console.log("User Context Courses", userCourseList);
   return (
     <div className="fixed h-full md:w-64 p-5 shadow-md">
       <Image src={"/vercel.svg"} alt="logo" width={160} height={100} priority />
