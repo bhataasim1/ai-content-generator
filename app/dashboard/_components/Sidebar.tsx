@@ -1,13 +1,16 @@
 "use client";
 import Image from "next/image";
-import React from "react";
+import React, { useContext } from "react";
 import { navList } from "../_constants/navList";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Progress } from "@/components/ui/progress";
+import { UserCourseListContext } from "@/app/_context/UserCourseList.context";
 
 const Sidebar = () => {
   const path = usePathname();
+  const { userCourseList } = useContext(UserCourseListContext);
+  console.log("User Context Courses", userCourseList);
   return (
     <div className="fixed h-full md:w-64 p-5 shadow-md">
       <Image src={"/vercel.svg"} alt="logo" width={160} height={100} priority />
@@ -31,11 +34,15 @@ const Sidebar = () => {
       </ul>
 
       <div className="absolute bottom-10 w-[80%]">
-        <Progress value={50} />
-        <h2 className="text-sm my-2">3 out of 5 Courses created</h2>
-        <h2 className="text-xs text-gray-500">
-          Upgrade your Plan for Unlimited
+        <Progress value={(userCourseList.length / 5) * 100} />
+        <h2 className="text-sm my-2">
+          {userCourseList.length} out of 5 Courses created
         </h2>
+        <Link href="/upgrade">
+          <h2 className="text-xs text-gray-500">
+            Upgrade your Plan for Unlimited
+          </h2>
+        </Link>
       </div>
     </div>
   );
