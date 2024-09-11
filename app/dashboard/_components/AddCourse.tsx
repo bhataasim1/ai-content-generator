@@ -1,11 +1,14 @@
 "use client";
+import { UserCourseListContext } from "@/app/_context/UserCourseList.context";
 import { Button } from "@/components/ui/button";
 import { useUser } from "@clerk/nextjs";
 import Link from "next/link";
+import { useContext } from "react";
 import { FaWandMagicSparkles } from "react-icons/fa6";
 
 const AddCourse = () => {
   const { isSignedIn, user } = useUser();
+  const { userCourseList } = useContext(UserCourseListContext);
 
   if (!isSignedIn) {
     return null;
@@ -21,7 +24,7 @@ const AddCourse = () => {
           Create new course with AI, share with friends and Earn some penny
         </p>
       </div>
-      <Link href="/create-course">
+      <Link href={userCourseList.length >= 5 ? "/upgrade" : "/create-course"}>
         <Button className="gap-2">
           <FaWandMagicSparkles />
           Create AI course
