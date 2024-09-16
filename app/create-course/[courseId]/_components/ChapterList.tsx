@@ -5,9 +5,10 @@ import { CourseType } from "@/types/types";
 type ChapterListProps = {
   course: CourseType | null;
   onRefresh: (refresh: boolean) => void;
+  edit?: boolean;
 };
 
-const ChapterList = ({ course, onRefresh }: ChapterListProps) => {
+const ChapterList = ({ course, onRefresh, edit = true }: ChapterListProps) => {
   if (!course || course.courseOutput.chapters.length === 0) {
     return <p>No chapters available.</p>;
   }
@@ -28,11 +29,13 @@ const ChapterList = ({ course, onRefresh }: ChapterListProps) => {
               <div>
                 <h2 className="font-medium text-lg">
                   {chapter?.chapter_name}
-                  <EditChapters
-                    course={course}
-                    index={index}
-                    onRefresh={() => onRefresh(true)}
-                  />
+                  {edit && (
+                    <EditChapters
+                      course={course}
+                      index={index}
+                      onRefresh={() => onRefresh(true)}
+                    />
+                  )}
                 </h2>
                 <p className="text-sm text-gray-500">{chapter.description}</p>
                 <p className="flex gap-2 text-primary items-center">
