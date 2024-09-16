@@ -6,6 +6,7 @@ import DropDownOptions from "./DropDownOptions";
 import { db } from "@/configs/db";
 import { CourseList } from "@/schema/schema";
 import { eq } from "drizzle-orm";
+import Link from "next/link";
 
 type CourseCardProps = {
   course: CourseType;
@@ -32,14 +33,17 @@ const CourseCard = ({ course, onRefresh }: CourseCardProps) => {
   // hover:border-primary hover:scale-105 transition-all cursor-pointer mt-4
   return (
     <div className="shadow-sm rounded-lg border p-2 ">
-      <Image
-        src={course?.courseBanner ?? "/vercel.svg"}
-        alt={course?.courseName ?? "Ai Course Generator"}
-        width={300}
-        height={200}
-        priority
-        className="w-full h-[200px] object-cover rounded-lg "
-      />
+      <Link href={`/course/${course.courseId}`}>
+        <Image
+          src={course?.courseBanner ?? "/vercel.svg"}
+          alt={course?.courseName ?? "Ai Course Generator"}
+          width={300}
+          height={200}
+          priority
+          className="w-full h-[200px] object-cover rounded-lg "
+        />
+      </Link>
+
       <div className="p-2">
         <h2 className="font-medium text-lg flex items-center justify-between">
           {course.courseOutput.topic}
