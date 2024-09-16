@@ -12,9 +12,14 @@ import { CourseType } from "@/types/types";
 type CourseBasicInfoProps = {
   courseInfo: CourseType | null;
   onRefresh: (refresh: boolean) => void;
+  edit?: boolean;
 };
 
-const CourseBasicInfo = ({ courseInfo, onRefresh }: CourseBasicInfoProps) => {
+const CourseBasicInfo = ({
+  courseInfo,
+  onRefresh,
+  edit = true,
+}: CourseBasicInfoProps) => {
   const [selectedImage, setSelectedImage] = useState<string | null | undefined>(
     null
   );
@@ -35,10 +40,12 @@ const CourseBasicInfo = ({ courseInfo, onRefresh }: CourseBasicInfoProps) => {
         <div className="">
           <h2 className="font-bold text-3xl">
             {courseInfo?.courseOutput.topic}
-            <EditCourseBasicInfo
-              courseInfo={courseInfo}
-              onRefresh={() => onRefresh(true)}
-            />
+            {edit && (
+              <EditCourseBasicInfo
+                courseInfo={courseInfo}
+                onRefresh={() => onRefresh(true)}
+              />
+            )}
           </h2>
           <p className="text-sm text-gray-400 mt-3">
             {courseInfo?.courseOutput.description}
@@ -56,16 +63,20 @@ const CourseBasicInfo = ({ courseInfo, onRefresh }: CourseBasicInfoProps) => {
               alt="image"
               width={200}
               height={200}
-              className="w-full rounded-xl h-[250px] object-cover cursor-pointer"
+              className={`w-full rounded-xl h-[250px] object-cover ${
+                edit && "cursor-pointer"
+              }`}
             />
           </label>
-          <Input
-            type="file"
-            accept="image/*"
-            id="image-upload"
-            className="opacity-0"
-            onChange={handleImageUpload}
-          />
+          {edit && (
+            <Input
+              type="file"
+              accept="image/*"
+              id="image-upload"
+              className="opacity-0"
+              onChange={handleImageUpload}
+            />
+          )}
         </div>
       </div>
     </div>
