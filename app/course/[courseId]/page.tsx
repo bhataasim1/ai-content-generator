@@ -1,9 +1,9 @@
 "use client";
 
-import Header from "@/app/_components/Header";
 import ChapterList from "@/app/create-course/[courseId]/_components/ChapterList";
 import CourseBasicInfo from "@/app/create-course/[courseId]/_components/CourseBasicInfo";
 import CourseDetail from "@/app/create-course/[courseId]/_components/CourseDetail";
+import Header from "@/app/dashboard/_components/Header";
 import { db } from "@/configs/db";
 import { CourseList } from "@/schema/schema";
 import { CourseType } from "@/types/types";
@@ -30,6 +30,7 @@ const Course = ({ params }: CourseParams) => {
 
   useEffect(() => {
     params && getCourse();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);
 
   return (
