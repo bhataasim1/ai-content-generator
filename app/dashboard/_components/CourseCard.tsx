@@ -46,7 +46,7 @@ const CourseCard = ({
           width={300}
           height={200}
           priority
-          className="w-full h-[200px] object-cover rounded-lg "
+          className="w-full h-[200px] object-cover rounded-lg hover:scale-105 transition-all cursor-pointer"
         />
       </Link>
 
