@@ -7,13 +7,19 @@ import { db } from "@/configs/db";
 import { CourseList } from "@/schema/schema";
 import { eq } from "drizzle-orm";
 import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
 
 type CourseCardProps = {
   course: CourseType;
   onRefresh: () => void;
+  displayUser?: boolean;
 };
 
-const CourseCard = ({ course, onRefresh }: CourseCardProps) => {
+const CourseCard = ({
+  course,
+  onRefresh,
+  displayUser = false,
+}: CourseCardProps) => {
   // console.log(course);
 
   const handleOnDelete = async () => {
@@ -47,12 +53,14 @@ const CourseCard = ({ course, onRefresh }: CourseCardProps) => {
       <div className="p-2">
         <h2 className="font-medium text-lg flex items-center justify-between">
           {course.courseOutput.topic}
-          <DropDownOptions handleDeleteCourse={() => handleOnDelete()}>
-            <HiOutlineDotsVertical
-              size={20}
-              className="cursor-pointer p-1 bg-purple-50 text-primary text-sm rounded-sm"
-            />
-          </DropDownOptions>
+          {!displayUser && (
+            <DropDownOptions handleDeleteCourse={() => handleOnDelete()}>
+              <HiOutlineDotsVertical
+                size={20}
+                className="cursor-pointer p-1 bg-purple-50 text-primary text-sm rounded-sm"
+              />
+            </DropDownOptions>
+          )}
         </h2>
         <p className="text-sm text-gray-400 my-1">{course.category}</p>
 
@@ -64,6 +72,20 @@ const CourseCard = ({ course, onRefresh }: CourseCardProps) => {
             {course.level} Level
           </h2>
         </div>
+
+        {displayUser && (
+          <div className="flex justify-start items-center gap-3 mt-2">
+            <Image
+              src={course?.userprofileimage || "/vercel.svg"}
+              alt={course?.username || "Ai Course Generator"}
+              width={30}
+              height={30}
+              priority
+              className="rounded-full "
+            />
+            <Badge variant={"outline"}>{course.username}</Badge>
+          </div>
+        )}
       </div>
     </div>
   );
