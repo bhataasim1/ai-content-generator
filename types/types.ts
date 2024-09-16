@@ -1,12 +1,12 @@
 export type UserInputType = {
-    category?: string;
-    difficulty?: string;
-    duration?: string;
-    video?: string;
-    totalChapters?: number;
-    topic?: string;
-    description?: string;
-  };
+  category?: string;
+  difficulty?: string;
+  duration?: string;
+  video?: string;
+  totalChapters?: number;
+  topic?: string;
+  description?: string;
+};
 
 export type ChapterType = {
   chapter_name: string;
@@ -36,4 +36,22 @@ export type CourseType = {
   createdBy: string | null;
   courseBanner: string | null;
   isPublished: boolean;
+};
+
+export type CodeExampleType = {
+  code: string[];
+};
+
+export type ChapterSectionType = {
+  title: string;
+  explanation: string;
+  code_examples?: CodeExampleType[];
+};
+
+export type ChapterContentType = {
+  id: number;
+  chapterId: number;
+  courseId: string;
+  content: ChapterSectionType[];
+  videoId: string;
 };
