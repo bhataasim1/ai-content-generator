@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { useEffect, useState } from "react";
 import { uploadFilesToFirebase } from "../_utils/uploadFilesToFirebase";
 import { CourseType } from "@/types/types";
+import Link from "next/link";
 
 type CourseBasicInfoProps = {
   courseInfo: CourseType | null;
@@ -54,7 +55,11 @@ const CourseBasicInfo = ({
             <LuPuzzle /> {courseInfo?.category}
           </h2>
 
-          <Button className="w-full mt-5">Start</Button>
+          {!edit && (
+            <Link href={`/course/${courseInfo?.courseId}/start`}>
+              <Button className="w-full mt-5">Start</Button>
+            </Link>
+          )}
         </div>
         <div>
           <label htmlFor="image-upload">
