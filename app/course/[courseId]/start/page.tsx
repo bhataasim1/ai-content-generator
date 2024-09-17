@@ -98,7 +98,7 @@ const CourseStart = ({ params }: CourseStartProps) => {
         ) : (
           <div className="p-10 flex justify-center flex-col items-center">
             <Image
-              src={course.courseBanner || "/vercel.svg"}
+              src={course.courseBanner || "/thumbnail.png"}
               alt={course.courseName || "AI Course Generator"}
               width={350}
               height={10}
@@ -112,7 +112,7 @@ const CourseStart = ({ params }: CourseStartProps) => {
             <p className="mt-10">
               <UserToolTip
                 username={course.username || "AI Course Generator"}
-                userProfileImage={course.userprofileimage || "/vercel.svg"}
+                userProfileImage={course.userprofileimage || "/userProfile.png"}
               />
             </p>
           </div>
