@@ -11,6 +11,7 @@ import { BaseEnvironment } from "@/configs/BaseEnvironment";
 import { IoCopyOutline } from "react-icons/io5";
 import { CourseType } from "@/types/types";
 import { ParamsType } from "../page";
+import Link from "next/link";
 
 const FinsihScreen = ({ params }: { params: ParamsType }) => {
   const { user } = useUser();
@@ -56,9 +57,9 @@ const FinsihScreen = ({ params }: { params: ParamsType }) => {
       {/* Add aslo the share button here */}
       <h2 className="mt-3">Course URL</h2>
       <h2 className="text-center font-bold text-gray-400 border p-2 rounded flex gap-5 items-center">
-        {COURSE_LINK}
+        <Link href={COURSE_LINK} className="cursor-pointer hover:text-primary transition-all delay-75">{COURSE_LINK}</Link>
         <IoCopyOutline
-          className="h-5 w-5 cursor-pointer"
+          className="h-5 w-5 cursor-pointer hover:text-primary transition-all delay-75 hover:scale-110"
           onClick={async () => await navigator.clipboard.writeText(COURSE_LINK)}
         />
       </h2>
