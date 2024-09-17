@@ -1,11 +1,12 @@
 "use client";
-import Image from "next/image";
+
 import React, { useContext } from "react";
 import { navList } from "../_constants/navList";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Progress } from "@/components/ui/progress";
 import { UserCourseListContext } from "@/app/_context/UserCourseList.context";
+import WordRotate from "@/components/ui/word-rotate";
 
 const Sidebar = () => {
   const path = usePathname();
@@ -13,7 +14,10 @@ const Sidebar = () => {
   // console.log("User Context Courses", userCourseList);
   return (
     <div className="fixed h-full md:w-64 p-5 shadow-md">
-      <Image src={"/vercel.svg"} alt="logo" width={160} height={100} priority />
+      <WordRotate
+        className="text-4xl font-bold text-black dark:text-white text-center"
+        words={["AI", "Course", "Generator"]}
+      />
       <hr className="my-5" />
 
       <ul>
