@@ -10,7 +10,7 @@ const Header = () => {
   const { user } = useUser();
   return (
     <div className="flex justify-between p-5 shadow-sm">
-      <Image src={"/vercel.svg"} alt="logo" width={150} height={100} priority />
+      <Image src={"/logo.png"} alt="logo" width={150} height={100} priority className="object-cover" />
       {!user ? (
         <Link href="/sign-up">
           <ShinyButton text="Sign Up" />
