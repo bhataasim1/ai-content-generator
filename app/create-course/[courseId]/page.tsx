@@ -49,9 +49,11 @@ const CoursePageLayout = ({ params }: { params: ParamsType }) => {
 
   // console.log(course);
 
+  if (!course) return null;
+
   const handleGenerateCourseContent = async () => {
     try {
-      await generateCourseContent(course!, setLoading);
+      await generateCourseContent(course, setLoading);
       await db
         .update(CourseList)
         .set({ isPublished: true })
