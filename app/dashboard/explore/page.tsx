@@ -23,7 +23,7 @@ const ExplorePage = () => {
     setCourseList(result as CourseType[]);
   };
 
-  console.log(courseList);
+  // console.log(courseList);
 
   useEffect(() => {
     getAllCourses();
