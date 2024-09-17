@@ -79,7 +79,7 @@ const CreateCoursePage = () => {
 
   useEffect(() => {
     user && getUserCourses();
-    if (userCourseList.length >= 5) {
+    if (userCourseList.length > 5) {
       router.replace("/dashboard/upgrade");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
