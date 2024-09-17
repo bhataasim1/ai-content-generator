@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# AI Course Generator
 
-## Getting Started
+AI Course Generator is a platform that allows users to easily create
+and generate educational courses using artificial intelligence. By simply entering course details like name, duration, number of chapters, and specifying if videos are included, Gemeni AI generates the entire course structure along with relevant YouTube videos for each chapter.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **User Registration**: Users can register and create their own accounts.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Course Creation**: Users can create a course by providing a course name, duration, number of chapters, and the option to include videos.
+- **AI-Generated Courses**: The platform uses AI to generate a complete course structure based on user input.
+- **YouTube Video Integration**: The AI automatically attaches relevant YouTube videos to each chapter of the course.
+- **Image Storage**: Course-related images are stored in Firebase.
+- **Frontend Design**: The frontend is built using the Shadcn UI library to provide a modern and responsive interface.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- **Next.js**
 
-## Learn More
+- **PostgreSQL**
+- **Firebase**
+- **Drizzle ORM**
+- **Shadcn UI Library**
 
-To learn more about Next.js, take a look at the following resources:
+## Installation
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Clone the repository:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+   ```bash
+   git clone https://github.com/bhataasim1/ai-content-generator.git
+   ```
 
-## Deploy on Vercel
+2. Navigate to the project directory:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   ```bash
+   cd ai-content-generator
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+3. Install dependencies:
+   ```bash
+   pnpm install
+   ```
+4. Set up the environment variables:
+   Create a `.env` file in the root directory and add the following values:
+   ```bash
+    NEXT_PUBLIC_HOST_URL="http://localhost:3000"
+    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY="Your-key"
+    CLERK_SECRET_KEY="Your-key"
+    NEXT_PUBLIC_CLERK_SIGN_IN_URL="/sign-in"
+    NEXT_PUBLIC_CLERK_SIGN_UP_URL="/sign-up"
+    NEXT_PUBLIC_GOOGLE_GEMINI_API_KEY="Your-key"
+    NEXT_PUBLIC_DRIZZLE_DATABASE_URL="Your-database-url"
+    NEXT_PUBLIC_FIREBASE_API_KEY="your-key"
+    NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN="your-auth-domain"
+    NEXT_PUBLIC_FIREBASE_PROJECT_ID="project-id"
+    NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET="your-storage-bucket"
+    NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID="your-sender-id"
+    NEXT_PUBLIC_FIREBASE_APP_ID="your-app-id"
+    NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID="your-measurement-id"
+    NEXT_PUBLIC_YOUTUBE_API_KEY="your-youtube-api-key"
+   ```
+5. Run the development server:
+   `bash
+   npm run dev
+6. Visit`http://localhost:3000` to view the application.
+
+## Open to Contributions
+
+AI Course Generator is an open-source project and we welcome contributions from the community. If you would like to contribute to the project, please follow the steps below:
+
+1. Fork the repository.
+
+2. Create a new branch for your feature or bug fix.
+3. Make your changes and commit them to your branch.
+4. Push your changes to your fork.
+5. Create a pull request to the main repository.
+
+We look forward to your contributions!
