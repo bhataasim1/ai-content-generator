@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 import CourseCard from "../_components/CourseCard";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import SkeletonLoading from "../_components/SkeletonLoading";
 
 const ExplorePage = () => {
   const [courseList, setCourseList] = useState<CourseType[] | null>(null);
@@ -35,15 +36,19 @@ const ExplorePage = () => {
       <p>Explore courses build with AI by Other Users</p>
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-5">
-        {courseList?.map((course) => (
-          <div key={course.courseId}>
-            <CourseCard
-              course={course}
-              onRefresh={() => getAllCourses()}
-              displayUser={true}
-            />
-          </div>
-        ))}
+        {courseList ? (
+          courseList?.map((course) => (
+            <div key={course.courseId}>
+              <CourseCard
+                course={course}
+                onRefresh={() => getAllCourses()}
+                displayUser={true}
+              />
+            </div>
+          ))
+        ) : (
+          <SkeletonLoading items={8} />
+        )}
       </div>
 
       <div className="flex justify-between mt-5 items-center">
