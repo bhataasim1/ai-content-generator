@@ -18,7 +18,7 @@ const FinsihScreen = ({ params }: { params: ParamsType }) => {
 
   const router = useRouter();
   const { HOST_URL } = new BaseEnvironment();
-  const COURSE_LINK = `${HOST_URL}/view/${course?.courseId}`;
+  const COURSE_LINK = `${HOST_URL}/course/${course?.courseId}/start`;
 
   useEffect(() => {
     params && getCourse();
