@@ -35,6 +35,8 @@ const CourseBasicInfo = ({
     uploadFilesToFirebase(file, courseInfo!);
   };
 
+  // console.log("Course Info", courseInfo);
+
   return (
     <div className="p-10 border rounded-xl shadow-sm mt-5">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
