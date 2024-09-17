@@ -7,6 +7,9 @@ import { and, eq } from "drizzle-orm";
 import React, { useEffect, useState } from "react";
 import ChapterListCard from "./_components/ChapterListCard";
 import ChapterContent from "./_components/ChapterContent";
+import Image from "next/image";
+import UserToolTip from "./_components/UserToolTip";
+import ScrollProgress from "@/components/ui/scroll-progress";
 
 type CourseStartProps = {
   params: { courseId: string };
@@ -84,7 +87,36 @@ const CourseStart = ({ params }: CourseStartProps) => {
       </div>
 
       <div className="md:ml-64">
-        <ChapterContent chapter={selectedChapter} content={chapterContent} />
+        {selectedChapter ? (
+          <div>
+            <ChapterContent
+              chapter={selectedChapter}
+              content={chapterContent}
+            />
+            <ScrollProgress />
+          </div>
+        ) : (
+          <div className="p-10 flex justify-center flex-col items-center">
+            <Image
+              src={course.courseBanner || "/vercel.svg"}
+              alt={course.courseName || "AI Course Generator"}
+              width={350}
+              height={10}
+              priority
+              className="rounded-lg hover:shadow-lg hover:scale-105 transition-transform duration-500 cursor-pointer mt-20"
+            />
+            <p className="felx justify-center gap-3 mt-10">
+              lets get started with the course {course.courseOutput.topic}.
+              Click on the chapters to get started. Enjoy learning!
+            </p>
+            <p className="mt-10">
+              <UserToolTip
+                username={course.username || "AI Course Generator"}
+                userProfileImage={course.userprofileimage || "/vercel.svg"}
+              />
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );
