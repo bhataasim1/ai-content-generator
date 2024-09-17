@@ -27,7 +27,7 @@ const UserToolTip = ({
         </TooltipTrigger>
         <TooltipContent variant={"secondary"}>
           <Image
-            src={userProfileImage || "/vercel.svg"}
+            src={userProfileImage || "/userProfile.png"}
             alt={username || "AI Course Generator"}
             width={50}
             height={50}
