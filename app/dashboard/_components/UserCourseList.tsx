@@ -33,8 +33,7 @@ const UserCourseList = () => {
     // console.log(res);
   };
 
-  if (!courses) return <div>Loading...</div>;
-  if (courses.length === 0) return <div>No courses found</div>;
+  if (courses?.length === 0) return <div className="flex justify-center items-center mt-44">No courses found</div>;
   return (
     <div className="mt-10">
       <h2 className="font-medium text-lg">My AI Courses</h2>
