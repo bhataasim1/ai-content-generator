@@ -8,6 +8,7 @@ import { eq } from "drizzle-orm";
 import { useContext, useEffect, useState } from "react";
 import CourseCard from "./CourseCard";
 import { UserCourseListContext } from "@/app/_context/UserCourseList.context";
+import SkeletonLoading from "./SkeletonLoading";
 
 const UserCourseList = () => {
   const { user } = useUser();
@@ -38,20 +39,17 @@ const UserCourseList = () => {
     <div className="mt-10">
       <h2 className="font-medium text-lg">My AI Courses</h2>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {courses
-          ? courses.map((course, index) => (
-              <CourseCard
-                key={index}
-                course={course}
-                onRefresh={() => getUserCourses()}
-              />
-            ))
-          : Array.from({ length: 5 }, (_, index) => (
-              <div
-                className="w-full bg-slate-300 animate-pulse rounded-lg h-[270px] mt-5"
-                key={index}
-              ></div>
-            ))}
+        {courses ? (
+          courses.map((course, index) => (
+            <CourseCard
+              key={index}
+              course={course}
+              onRefresh={() => getUserCourses()}
+            />
+          ))
+        ) : (
+          <SkeletonLoading items={5} />
+        )}
       </div>
     </div>
   );
